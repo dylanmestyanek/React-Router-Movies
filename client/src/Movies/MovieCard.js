@@ -5,9 +5,7 @@ const MovieCard = ({
   title, 
   director,
   metascore,
-  stars,
-  addToSavedList,
-  setSavedList 
+  stars
 }) => {
   return (
     <div className="save-wrapper">
@@ -20,15 +18,12 @@ const MovieCard = ({
           Metascore: <strong>{metascore}</strong>
         </div>
         <h3>Actors</h3>
-        {stars
-        ? stars.map(star => (
-            <div key={star} className="movie-star">
-              {star}
-            </div>
-          ))
-        : null}
+        {stars && stars.map(star => (
+          <div key={star} className="movie-star">
+            {star}
+          </div>
+        ))}
       </div>
-      <button onClick={() => addToSavedList({title: title})} className="save-button">Save</button>
     </div>
   );
 };
