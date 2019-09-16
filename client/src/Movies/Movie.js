@@ -4,6 +4,7 @@ import MovieCard from "./MovieCard";
 
 const Movie = (props) => {
   const [movie, setMovie] = useState({});
+  const { addToSavedList, setSavedList } = props;
  
   useEffect(() => {
     const id = props.match.params.id;
@@ -30,13 +31,13 @@ const Movie = (props) => {
   if (!movie) {
     return <div>Loading movie information...</div>;
   }
-
   return (
     <MovieCard
       title={movie.title}
       director={movie.director}
       metscore={movie.metascore}
       stars={movie.stars}
+      addToSavedList={addToSavedList}
     />
   );
 }

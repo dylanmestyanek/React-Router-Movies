@@ -1,6 +1,14 @@
 import React from 'react';
+import Movie from './Movie';
 
-const MovieCard = ({ title, director, metascore, stars }) => {
+const MovieCard = ({ 
+  title, 
+  director,
+  metascore,
+  stars,
+  addToSavedList,
+  setSavedList 
+}) => {
   return (
     <div className="save-wrapper">
       <div className="movie-card">
@@ -12,9 +20,15 @@ const MovieCard = ({ title, director, metascore, stars }) => {
           Metascore: <strong>{metascore}</strong>
         </div>
         <h3>Actors</h3>
-        <div>{stars}</div>
+        {stars
+        ? stars.map(star => (
+            <div key={star} className="movie-star">
+              {star}
+            </div>
+          ))
+        : null}
       </div>
-      <div className="save-button">Save</div>
+      <button onClick={() => addToSavedList({title: title})} className="save-button">Save</button>
     </div>
   );
 };
