@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import MovieCard from "./MovieCard";
 
 const Movie = (props) => {
-  const [movieState, setMovieState] = useState({});
+  const [movie, setMovie] = useState({});
  
   useEffect(() => {
     const id = props.match.params.id;
@@ -12,7 +13,7 @@ const Movie = (props) => {
        axios
         .get(`http://localhost:5000/api/movies/${id}`)
         .then(response => {
-          setMovieState(response.data);
+          setMovie(response.data);
         })
         .catch(error => {
           console.error(error);
@@ -26,26 +27,17 @@ const Movie = (props) => {
   //   addToSavedList(movie)
   // }
 
-  if (!movieState) {
+  if (!movie) {
     return <div>Loading movie information...</div>;
   }
 
-  const { title, director, metascore, stars } = movieState;
   return (
-    <div className="save-wrapper">
-      <div className="movie-card">
-        <h2>{title}</h2>
-        <div className="movie-director">
-          Director: <em>{director}</em>
-        </div>
-        <div className="movie-metascore">
-          Metascore: <strong>{metascore}</strong>
-        </div>
-        <h3>Actors</h3>
-        <div>{stars}</div>
-       </div>
-       <div className="save-button">Save</div>
-    </div>
+    <MovieCard
+      title={movie.title}
+      director={movie.director}
+      metscore={movie.metascore}
+      stars={movie.stars}
+    />
   );
 }
 
